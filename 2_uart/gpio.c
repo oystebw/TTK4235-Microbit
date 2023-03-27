@@ -2,8 +2,8 @@
 #include "gpio.h"
 
 void gpio_init(){
-	  GPIO0->PIN_CNF[14] = 0; // button A
-	  GPIO0->PIN_CNF[23] = 0; // button B
+	  GPIO0->PIN_CNF[14] = 0; // Button A
+	  GPIO0->PIN_CNF[23] = 0; // Button B
 
 	  // Configure leds
 	  GPIO0->PIN_CNF[21] = 1; //Row 1

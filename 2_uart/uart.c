@@ -1,6 +1,5 @@
 #include "uart.h"
 
-
 void uart_init(){
     GPIO0->PIN_CNF[8] = 1;
     UART->PSEL_TXD &= ~(1<<31 | 0b111001);

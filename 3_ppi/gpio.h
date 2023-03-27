@@ -2,8 +2,8 @@
 #define GPIO_H
 #include <stdint.h>
 
-#define GPIO0 ((NRF_GPIO_REGS0*)0x50000000) //gpio 0 base adress
-#define GPIO1 ((NRF_GPIO_REGS1*)0x50000300) //gpio 1 base adress
+#define GPIO0 ((NRF_GPIO_REGS0*)0x50000000) // GPIO 0 base address
+#define GPIO1 ((NRF_GPIO_REGS1*)0x50000300) // GPIO 1 base address
 
 typedef struct {
 	volatile uint32_t RESERVED0[321];

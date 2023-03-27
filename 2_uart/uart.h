@@ -1,7 +1,7 @@
 #pragma once
 #include "gpio.h"
 
-#define UART ((NRF_UART_REG*)0x40002000) //uart base adress
+#define UART ((NRF_UART_REG*)0x40002000) // UART base address
 
 
 typedef struct{
