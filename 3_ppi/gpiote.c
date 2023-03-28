@@ -5,14 +5,15 @@ void gpiote_init(){
     GPIOTE->CONFIG[0] = 1<<17 | 14<<8 | 1;
 
     // Configure five tasks for toggling supply voltage for rows
-    GPIOTE->CONFIG[1] = 3<<16 | 21<<8 | 3;
+    GPIOTE->CONFIG[1] = 1<<20 | 3<<16 | 21<<8 | 3;
     GPIOTE->CONFIG[2] = 3<<16 | 22<<8 | 3;
-    GPIOTE->CONFIG[3] = 3<<16 | 15<<8 | 3;
+    GPIOTE->CONFIG[3] = 1<<20 | 3<<16 | 15<<8 | 3;
     GPIOTE->CONFIG[4] = 3<<16 | 24<<8 | 3;
-    GPIOTE->CONFIG[5] = 3<<16 | 19<<8 | 3;
+    GPIOTE->CONFIG[5] = 1<<20 | 3<<16 | 19<<8 | 3;
 
-    // Toggle on row 1, 3 and 5
-    GPIOTE->TASKS_OUT[1] = 1;
-    GPIOTE->TASKS_OUT[3] = 1;
-    GPIOTE->TASKS_OUT[5] = 1;
+    // Making event tied to button B
+    GPIOTE->CONFIG[6] = 1<<17 | 23<<8 | 1;
+
+    // Only one register left, will use it on middle column
+    GPIOTE->CONFIG[7] = 1<<20 | 3<<16 | 31<<8 | 3;
 }
