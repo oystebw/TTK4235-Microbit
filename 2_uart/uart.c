@@ -1,21 +1,31 @@
 #include "uart.h"
 
 void uart_init(){
-    GPIO0->PIN_CNF[8] = 1;
-    UART->PSEL_TXD &= ~(1<<31 | 0b111001);
-    UART->PSEL_RXD &= ~(1<<31 | 0b110111);
-    UART->BAUDRATE = 9600;
+    GPIO0->PIN_CNF[6] = 0;
+    GPIO1->PIN_CNF[8] = 1;
+
+    UART->PSEL_TXD = 0;
+    UART->PSEL_TXD = 0b110;
+
+    UART->PSEL_RXD = 0;
+    UART->PSEL_RXD = 0b101000;
+
+    UART->BAUDRATE = 0x00275000;
+    UART->PSEL_RTS = 1<<31;
+    UART->PSEL_CTS = 1<<31;
     UART->ENABLE = 4;
     UART->TASKS_STARTRX = 1;
 }
 
 void uart_send(char letter){
-    UART->TXD = letter;
     UART->TASKS_STARTTX = 1;
+    UART->TXD = letter;
     while(!UART->EVENTS_TXDRDY){
 
     }
     UART->TASKS_STOPTX = 1;
+    UART->TASKS_STARTTX = 0;
+    UART->EVENTS_TXDRDY = 0;
 }
 
 char uart_read(){
