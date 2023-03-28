@@ -30,12 +30,26 @@ void uart_send(char letter){
 
 char uart_read(){
     char temp;
-    UART->TASKS_STARTRX = 1;
-    while(!UART->EVENTS_TXDRDY){
+    while(!UART->EVENTS_RXDRDY){
 
     }
-    UART->EVENTS_TXDRDY = 0;
+    if(GPIO0->IN & 1<<21){
+        gpio_lights_off();
+    }
+    else{
+        gpio_lights_on();
+    }
+    UART->EVENTS_RXDRDY = 0;
     temp = UART->RXD;
     UART->TASKS_STOPTX = 1;
     return temp;
+}
+
+ssize_t _write(int fd, const void *buf, size_t count){
+    char * letter = (char *)(buf);
+    for(int i = 0; i < count; i++){
+        uart_send(*letter);
+        letter++;
+    }
+    return count;
 }
